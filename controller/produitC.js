@@ -9,6 +9,9 @@ module.exports = {
     },
 
     addProd: async(req, res) => {
+
+        req.body["image"] = !req.file ? null : req.file.filename;
+
         const produit = new produitM(req.body);
         await produit.save(req.body).then(docs => {
             res.status(200).json({ status: '200', message: 'insert successful!', data: docs });
