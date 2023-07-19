@@ -7,4 +7,5 @@ router.put('/changePassword', userC.changePassword);
 router.put('/sendActivationCode', userC.sendActivationCode);
 router.post('/verifyCode', userC.verifyCode);
 router.get('/getUsers', userC.getUsers);
+router.get('/findUserById/:id', userC.findUserById);
 module.exports = router;

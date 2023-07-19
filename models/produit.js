@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { schema } = require("./categorie");
 
 const produitSchema = mongoose.Schema({
     nom: {
@@ -37,7 +36,9 @@ const produitSchema = mongoose.Schema({
     },
     categorie: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'categorie',
+    },
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
     }
 })
 

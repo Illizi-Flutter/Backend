@@ -124,5 +124,12 @@ module.exports = {
         } else
             res.status(500).json({ message: "2 passwords don't match" })
     },
+    findUserById: async(req, res) => {
+        await userM.findById(req.params.id).then(docs => {
+            res.status(200).json({ status: '200', message: 'affichage successful!', data: docs });
+        }).catch(err => {
+            res.status(500).json({ status: '400', message: err, data: null })
+        });
+    },
 
 }

@@ -19,7 +19,7 @@ app.use(cors());
 app.use(cors({
     origin: ['http://localhost:64404'],
 }));
-
+app.use('/images', express.static('images'));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     next();

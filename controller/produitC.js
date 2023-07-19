@@ -1,4 +1,5 @@
 const produitM = require("../models/produit");
+const userM = require("../models/user");
 module.exports = {
     getAll: async(req, res) => {
         await produitM.find({}).then(docs => {
@@ -40,5 +41,33 @@ module.exports = {
         }).catch(err => {
             res.status(500).json({ status: '400', message: err, data: null })
         });
+    },
+    getProductByUserId: async(req, res) => {
+        let prodList = [];
+        try {
+
+            let products = await produitM.find({ isEnabled: true });
+            for (const prod of products) {
+                if (prod.numberOfItems != 0) {
+
+                    let shop = await userM.find({ _id: prod.user_id })
+                    if (shop.length != 0) {
+                        const productJson = {
+                            nom: prod.nom,
+                            prix: prod.prix,
+                            quantity: prod.quantity,
+                            username: shop[0].username,
+                            imageUser: shop[0].image,
+                            imageProd: prod.image,
+                        }
+                        prodList.push(productJson);
+                    }
+                }
+
+            }
+            res.status(200).json({ status: '200', message: 'affichage successful!', data: prodList });
+        } catch (error) {
+            throw error;
+        }
     }
 }
