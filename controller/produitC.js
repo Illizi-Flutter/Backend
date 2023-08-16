@@ -53,6 +53,7 @@ module.exports = {
                     let shop = await userM.find({ _id: prod.user_id })
                     if (shop.length != 0) {
                         const productJson = {
+                            id: prod.id,
                             nom: prod.nom,
                             prix: prod.prix,
                             quantity: prod.quantity,
@@ -69,5 +70,5 @@ module.exports = {
         } catch (error) {
             throw error;
         }
-    }
+    },
 }
